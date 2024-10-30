@@ -1,0 +1,72 @@
+$light: (
+  color: (transparent: transparent,
+    base:$uni-text-color,
+    primary:$uni-color-primary,
+    main:$uni-color-main,
+    inverse:$uni-text-color-inverse,
+    placeholder:$uni-text-color-placeholder,
+    warning:$uni-color-warning,
+    success:$uni-color-success,
+    label:$uni-color-label,
+    stress:$uni-color-stress,
+    error:$uni-color-error,
+    disabled:$uni-text-color-disable,
+    grey:$uni-text-color-grey,
+    title:$uni-color-title,
+    subtitle:$uni-color-subtitle,
+    paragraph:$uni-color-paragraph,
+  ),
+  background: (transparent: transparent,
+    base:$uni-bg-color,
+    label:$uni-bg-color-label,
+    section:$uni-bg-color-section,
+    primary:$uni-bg-color-primary,
+    main:$uni-bg-color-main,
+    grey: $uni-bg-color-grey,
+    inverse: $uni-bg-color-inverse,
+    hover: $uni-bg-color-hover,
+    mask: $uni-bg-color-mask,
+    warning:$uni-color-warning,
+    success:$uni-color-success,
+    error:$uni-color-error,
+    stress:$uni-color-stress,
+  )
+);
+
+$dark: (
+  color:(transparent: transparent),
+  background: (transparent: transparent)
+);
+
+$themes: (
+  light: $light,
+  dark: $dark,
+);
+
+$styleMaps: (
+  color: color,
+  background: bg,
+);
+
+@mixin set-theme($theme) {
+
+  @each $key,
+  $colors in map-get($themes, $theme) {
+
+    @each $name,
+    $color in $colors {
+      #{if($theme == "dark", ".dark", "")} .#{map-get($styleMaps, $key)}-#{'' + $name} {
+        #{$key}: $color !important;
+      }
+    }
+  }
+}
+
+@each $theme,
+$value in $themes {
+  .#{$theme} {
+    position: relative;
+  }
+
+  @include set-theme($theme);
+}

@@ -1,0 +1,102 @@
+<!-- 壳里layout设置为default，其他环境下设置为false -->
+<route lang="json" type="home">
+  {
+  "layout": false,
+  "style": {
+  "navigationStyle": "custom"
+  }
+  }
+</route>
+
+<template>
+  <view style="flex: 1; justify-content: center; align-items: center; flex-direction: column; padding: 30rpx;">
+    <image style="border-radius: 6px; width: 90px; height: 90px;" src="/static/logo.png" mode="aspectFit" />
+    <wd-message-box selector="prompt" :custom-style="`--wot-button-primary-bg-color: ${$config.COLOR_PRIMARY}`">
+      <view
+        style="overflow: hidden; display: block; width: 100%; font-size: 26rpx; text-align: center; line-height: 44rpx;">
+        <text>为了更好的向你提供服务，请您阅读并同意以下协议</text>
+        <label @click="uniNavigator({ url: buildDocumentURL('服务协议', '/userAgreementInfo') })" class="color-primary"
+          style="display: inline-flex;">
+          《服务条款》
+        </label>
+        <text>和</text>
+        <label @click="uniNavigator({ url: buildDocumentURL('隐私政策', '/privateInfo') })" class="color-primary"
+          style="display: inline-flex;">
+          《隐私政策》
+        </label>
+      </view>
+    </wd-message-box>
+  </view>
+</template>
+
+<script setup>
+  import { reactive, onMounted } from "vue";
+  import { getClient, transformURL, uniNavigator } from "@/libs/utils";
+  import { useMessage } from "@/uni_modules/wot-design-uni";
+
+  const { $bridge = {}, $config = {} } = getApp?.()?.globalData || {};
+
+  const message = useMessage('prompt');
+
+  const buildDocumentURL = (title, api) => transformURL("/pages/common/webview",
+    {
+      title: encodeURIComponent(title),
+      url: encodeURIComponent(transformURL("/html/document.html",
+        { title },
+        $config.URL_REMOTE + $config.API_PREFIX + api
+      ))
+    }
+  );
+
+  onMounted(async () => {
+    if ([9, 10].includes(getClient())) {
+      uni.getStorage({
+        key: "agreedAgreement",
+        success(data) {
+          +data && uniNavigator({ url: $config.PAGE_HOME_CLIENT, type: "reLaunch" });
+        },
+        fail() {
+          message.confirm({
+            title: "服务协议和隐私政策",
+            confirmButtonText: "同意",
+            cancelButtonText: "拒绝",
+          }).then(agree).catch(refuse);
+        }
+      });
+      return;
+    }
+    uni.setStorageSync("isUpgrade", 0);
+
+    uniNavigator({ url: $config.PAGE_HOME_CLIENT, type: "reLaunch" });
+  })
+
+  const agree = () => {
+    uni.setStorage({
+      key: "agreedAgreement",
+      data: 1,
+      success() {
+        $bridge.call?.("weAds.initAD", {}, result => {
+          uniNavigator({ url: $config.PAGE_HOME_CLIENT, type: "reLaunch" });
+          changePopup(false, "spread");
+        });
+      }
+    });
+  }
+
+  const refuse = () => {
+    $bridge.call?.("weAds.finish", {}, result => {
+      changePopup(false, "spread");
+    });
+  }
+
+</script>
+
+<style lang="scss">
+  /* #ifndef APP-PLUS */
+  page {
+    height: 100%;
+    flex: 1;
+  }
+
+  /* #endif */
+</style>

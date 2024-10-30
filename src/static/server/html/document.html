@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/viewer.css">
+  <script type="text/javascript" src="../js/uni.webview.1.5.6.js"></script>
+  <script type="text/javascript" src="../js/viewer.min.js"></script>
+  <title>加载中...</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    #container {
+      box-sizing: border-box;
+      margin: 0 auto;
+      min-height: 100vh;
+      min-width: 100vw;
+      padding: 12px;
+      line-height: 2;
+      background-color: #f4f5fa;
+      color: #000 !important;
+    }
+
+    #container>.placeholder {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f5fa;
+      color: #000 !important;
+    }
+
+    #container img,
+    #container video {
+      display: block;
+      max-width: 100% !important;
+      object-fit: contain;
+      margin: auto;
+    }
+
+    #container img {
+      height: auto !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container">
+    <div class="placeholder">加载中...</div>
+  </div>
+</body>
+<script>
+  const fromEntries = (arrArg) => {
+    // Map
+    if (Object.prototype.toString.call(arrArg) === "[object Map]") {
+      const resMap = {};
+      for (const key of arrArg.keys()) {
+        resMap[key] = arrArg.get(key);
+      }
+      return resMap;
+    }
+    // array
+    if (Array.isArray(arrArg)) {
+      const resArr = {}
+      arrArg.map(([key, value]) => {
+        resArr[key] = value
+      })
+      return resArr
+    }
+    throw "Uncaught TypeError: argument is not iterable";
+  }
+
+  const transformQueryString = params => {
+    if (typeof params === "string") {
+      const queryStrings = params.match(/[^?&]+=[^?&]+/g);
+
+      return queryStrings ? fromEntries(
+        queryStrings.map(item => item.split(/^([^=]*)=*/).filter(Boolean))
+      ) : {};
+    }
+    if (typeof params === "object") {
+      return Object.keys(params).filter(key => params[key]).map(key => `${key}=${params[key]}`).join("&");
+    }
+    alert("Parameter error");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const { hash: url, search } = location,
+      { title, params } = transformQueryString(search);
+
+    document.title = title ? decodeURIComponent(title) : "绿康源品";
+
+    if (url) {
+      fetch(url.slice(1) + (params ? transformQueryString(JSON.parse(decodeURIComponent(params))) : ""))
+        .then(res => res.text())
+        .then((res) => {
+          try {
+            const { data, code, msg } = JSON.parse(res);
+            if (data.content || data.detail) {
+              document.getElementById("container").innerHTML = data.content || data.detail;
+              return;
+            }
+            alert(msg);
+          } catch (error) {
+            document.getElementById("container").innerHTML = res
+          }
+        });
+      return;
+    }
+
+    function UniAppJSBridgeFunc() {
+      uni.getEnv((res) => {
+        function innerHTML(env = "default") {
+          const richText = {
+            h5: () => localStorage.getItem("richText"),
+            plus: () => plus.storage.getItem("richText"),
+            default: () => `<div id="placeholder">暂未实现...</div>`
+          }[env]();
+          richText && (document.getElementById("container").innerHTML = richText);
+        }
+        switch (true) {
+          case res.h5:
+            innerHTML("h5");
+            break;
+          case res.plus:
+            (window.plus ? innerHTML("plus") : document.addEventListener("plusready", () => innerHTML("plus")));
+            break;
+          default:
+            innerHTML();
+            break;
+        }
+      });
+    }
+    window.UniAppJSBridge ? UniAppJSBridgeFunc() : document.addEventListener('UniAppJSBridgeReady', UniAppJSBridgeFunc);
+  }, true);
+
+  document.getElementById("container").addEventListener("click", ({ target }) => {
+    switch (target.tagName) {
+      case "IMG":
+        new Viewer(target);
+        break;
+
+      default:
+        break;
+    }
+  });
+
+</script>
+
+</html>

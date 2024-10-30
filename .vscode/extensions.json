@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "antfu.unocss",
+    "antfu.iconify",
+    "uni-helper.uni-app-schemas-vscode",
+    "uni-helper.uni-highlight-vscode",
+    "fabiospampinato.vscode-highlight",
+    "kisstkondoros.vscode-gutter-preview",
+    "ionutvmi.path-autocomplete",
+    "streetsidesoftware.code-spell-checker",
+    "jock.svg",
+  ]
+}

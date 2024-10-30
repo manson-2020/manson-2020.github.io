@@ -1,0 +1,85 @@
+<route lang="json">{
+  "layout": false,
+  "style": {
+    "navigationStyle": "custom",
+    "app-plus": {
+      "titleNView": {
+        "type": "default"
+      }
+    }
+  }
+}</route>
+<template>
+  <view style="flex: 1;">
+    <view v-if="systemInfo.statusBarHeight" :style="{ height: `${systemInfo.statusBarHeight}px` }" />
+    <web-view ref="wv" style="flex: 1;" :webview-styles="webviewStyles" :src="src" @onPostMessage="onPostMessage"
+      @message="onWebViewMessage" />
+  </view>
+</template>
+
+<script setup>
+  import { onMounted, ref } from "vue";
+  import { onLoad, onBackPress } from "@dcloudio/uni-app";
+  import { uniNavigator, transformURL, includeSrc } from "@/libs/utils";
+
+  const { $config = {} } = getApp().globalData || {};
+
+  const webviewStyles = {
+    progress: {
+      color: $config.COLOR_PRIMARY,
+    },
+  };
+
+  const systemInfo = ref({});
+  const wv = ref({});
+  const src = ref("");
+  const isHome = ref(true);
+
+  onLoad(({ url }) => {
+    src.value = transformURL("/static/server/html/redirect.html", { url: encodeURIComponent(url) });
+  });
+
+  onMounted(() => {
+    systemInfo.value = uni.getSystemInfoSync();
+
+    inject();
+  });
+
+  onBackPress((e) => {
+    if (e.from === "navigateBack") return false;
+    wv.value?.goBack?.();
+    return isHome.value;
+  });
+
+  const inject = () => {
+
+  }
+
+  const onPostMessage = (e) => {
+    switch (e.detail.data[0]) {
+      case "hide":
+        isHome.value = true;
+        break;
+      case "show":
+        isHome.value = false;
+        break;
+      case "into":
+        inject();
+        break;
+      default:
+        break;
+    }
+  }
+
+  const onWebViewMessage = (event) => {
+    console.log(event);
+
+    if (event.data === 'load') {
+      // 在这里获取web-view组件的URL
+      console.log('WebView URL:', event.src);
+    }
+  }
+
+</script>
+
+<style scoped></style>

@@ -1,0 +1,277 @@
+{
+  "easycom": {
+    "autoscan": true
+  },
+  "globalStyle": {
+    "backgroundColor": "@bgColor",
+    "backgroundColorBottom": "@bgColorBottom",
+    "backgroundColorTop": "@bgColorTop",
+    "backgroundTextStyle": "@bgTxtStyle",
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTextStyle": "@navTxtStyle",
+    "navigationBarTitleText": "新生儿随访系统",
+    "app-plus": {
+      "titleNView": {
+        "type": "float"
+      },
+      "softinputNavBar": "none",
+      "homeButton": true,
+      "pullToRefresh": {
+        "color": "#f7676e"
+      }
+    },
+    "h5": {},
+    "rpxCalcMaxDeviceWidth": 450,
+    "maxWidth": 450,
+    "dynamicRpx": true
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "@tabFontColor",
+    "fontSize": "12px",
+    "selectedColor": "@tabSelectedColor",
+    "backgroundColor": "@tabBgColor",
+    "position": "bottom",
+    "borderStyle": "@tabBorderStyle",
+    "iconWidth": "30px",
+    "height": "66px",
+    "blurEffect": "light",
+    "midButton": {
+      "width": "80px",
+      "height": "80px",
+      "iconPath": "/static/img/tabs/check-in.png",
+      "iconWidth": "80px"
+    },
+    "spacing": "3px",
+    "list": [
+      {
+        "pagePath": "pages/tabs/home",
+        "iconPath": "/static/img/tabs/home.png",
+        "selectedIconPath": "/static/img/tabs/home-1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabs/logs",
+        "iconPath": "/static/img/tabs/logs.png",
+        "selectedIconPath": "/static/img/tabs/logs-1.png",
+        "text": "随访历史"
+      },
+      {
+        "pagePath": "pages/tabs/mine",
+        "iconPath": "/static/img/tabs/mine.png",
+        "selectedIconPath": "/static/img/tabs/mine-1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "pages/index",
+      "type": "home",
+      "layout": false,
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/auth/login",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "transparentTitle": "auto",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#f5f6f9"
+      }
+    },
+    {
+      "path": "pages/common/error",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "Oops, An error has occurred!",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "black",
+        "disableScroll": true,
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "type": "default"
+          }
+        },
+        "leftWindow": false,
+        "topWindow": false
+      }
+    },
+    {
+      "path": "pages/common/upgrade",
+      "type": "page",
+      "layout": false,
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "animationDuration": 200,
+          "animationType": "fade-in",
+          "background": "transparent",
+          "backgroundColorTop": "transparent",
+          "popGesture": "none",
+          "scrollIndicator": "none",
+          "titleNView": false
+        },
+        "disableScroll": true,
+        "leftWindow": false,
+        "topWindow": false
+      }
+    },
+    {
+      "path": "pages/common/webview-custom",
+      "type": "page",
+      "layout": false,
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/common/webview",
+      "type": "page",
+      "layout": false,
+      "style": {
+        "navigationBarTextStyle": "@navTxtStyle",
+        "navigationBarBackgroundColor": "@navBgColor",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/all-bb",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "全部新生儿",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/dengji-1",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "12周龄婴儿GESELL发育诊断量表问卷",
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/dengji-2",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "患教资料",
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/dengji-3",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "生长发育曲线登记",
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/dengji-4",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "一般情况反馈表",
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/wenjuantianbao",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "问卷填报",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/main/zipingbiao",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "神经行为发育自评",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/tabs/home",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/tabs/logs",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "随访历史",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/tabs/mine",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "app-plus": {
+          "titleNView": {
+            "type": "float"
+          }
+        }
+      }
+    }
+  ],
+  "subPackages": []
+}

@@ -1,0 +1,316 @@
+/* #ifndef APP-PLUS-NVUE */
+
+@mixin initStyle {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+// restore
+// #ifdef H5
+
+#u-a-p>div {
+  &>div {
+    @media screen and (orientation: portrait) {
+      top: calc(12px + var(--window-top) + var(--status-bar-height)) !important;
+    }
+
+    @media screen and (orientation: landscape) {
+      top: 12px !important;
+      right: var(--window-bottom) !important;
+      right: constant(safe-area-inset-bottom) !important;
+      right: env(safe-area-inset-bottom) !important;
+    }
+  }
+}
+
+#app {
+  height: 100vh;
+}
+
+.uni-tabbar {
+  .uni-tabbar-border {
+    display: none;
+  }
+
+  & {
+    border-radius: 32rpx 32rpx 0 0;
+    box-shadow: 0 0 8rpx 8rpx rgba(37, 51, 123, 0.05);
+  }
+}
+
+uni-page {
+  position: relative;
+}
+
+
+body {
+  background-image: unset !important;
+}
+
+uni-app {
+  // #endif
+
+  @each $tag in (page,
+    uni-left-window,
+    uni-top-window,
+    view,
+    picker,
+    button,
+    label,
+    swiper,
+    scroll-view,
+    cover-view,
+    navigator,
+    swiper,
+    swiper-item,
+    radio,
+    radio-group,
+    checkbox-group,
+    checkbox) {
+
+    #{$tag} {
+      @include initStyle;
+    }
+
+    .init #{$tag} {
+      display: unset;
+      flex-direction: unset;
+      box-sizing: unset;
+      background-repeat: unset;
+      background-size: unset;
+      background-position: unset;
+    }
+  }
+
+  uni-left-window {
+    flex-shrink: 0;
+  }
+
+  uni-main {
+    overflow: hidden;
+  }
+
+  page {
+    color: $uni-text-color;
+    font-size: 24rpx;
+    font-weight: 500;
+    background: $uni-bg-color;
+  }
+
+  swiper {
+    touch-action: none;
+  }
+
+  image {
+    will-change: transform;
+  }
+
+  label,
+  [nvue] label {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  picker[disabled],
+  button[disabled] {
+    opacity: 0.5;
+  }
+
+  // #ifdef H5
+}
+
+// #endif
+
+::selection {
+  background: #409eff;
+  color: #fff;
+  font-weight: 900;
+  font-size: 32px;
+}
+
+// ::-webkit-scrollbar {
+//   display: none;
+//   height: 0;
+//   width: 0;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   border-radius: 10px;
+//   box-shadow: inset 0 0 5px rgb(204, 204, 204, 0.6);
+// }
+
+// ::-webkit-scrollbar-track {
+//   box-shadow: inset 0 0 5px rgb(204, 204, 204, 0.6);
+//   border-radius: 10px;
+// }
+
+.ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.multi-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+
+.status-bar {
+  padding-top: calc(var(--window-top) + var(--status-bar-height));
+}
+
+.rich-text {
+  font-size: 30rpx;
+  line-height: 2;
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* #endif */
+
+page {
+  & {
+    min-height: 100%;
+  }
+
+  &::before {
+    // content: "";
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: var(--window-left);
+    right: var(--window-right);
+    filter: blur(2px);
+    background-color: $uni-bg-color;
+    background-size: cover !important;
+    background-repeat: repeat !important;
+    background-position: center !important;
+  }
+}
+
+@font-face {
+  font-family: iconfont;
+  /* Project id 4258857 */
+  src: url('/static/fonts/iconfont-2.ttf');
+}
+
+.iconfont {
+  font-family: iconfont !important;
+}
+
+.input {
+  /* #ifndef APP-PLUS-NVUE */
+  border: none;
+  outline: none;
+  /* #endif */
+  background-color: transparent;
+}
+
+.shelter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(51, 51, 51, 0.3);
+}
+
+.uni-modal {
+  border-radius: 12px;
+  // #ifndef APP-PLUS-NVUE
+  backdrop-filter: blur(30rpx);
+  // #endif
+  background-color: $uni-bg-color-section;
+
+  &__textarea {
+    background: $uni-bg-color;
+    color: $uni-text-color;
+    border-radius: 12rpx;
+    font-size: 32rpx;
+    margin: 24rpx 0;
+  }
+
+  &__title {
+    color: $uni-color-primary;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  &__bd {
+    color: $uni-text-color;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  &__btn {
+    font-size: 16px;
+
+    &::after {
+      border-color: $uni-bg-color;
+    }
+  }
+
+  &__ft::after {
+    border-color: $uni-bg-color;
+  }
+
+  &__btn:active {
+    background-color: $uni-bg-color;
+  }
+}
+
+.loadmore {
+  color: $uni-text-color-placeholder;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}
+
+// #ifdef H5
+
+:root {
+  --safe-area-inset-top: constant(safe-area-inset-top, 0px);
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --shell-status-bar-height: 0px;
+}
+
+.uni-page-head {
+  height: 44px;
+  height: calc(44px + constant(safe-area-inset-top, 0px) + var(--shell-status-bar-height, 0px));
+  height: calc(44px + env(safe-area-inset-top, 0px) + var(--shell-status-bar-height, 0px));
+
+  padding-top: calc(7px + constant(safe-area-inset-top, 0px) + var(--shell-status-bar-height, 0px));
+  padding-top: calc(7px + env(safe-area-inset-top, 0px) + var(--shell-status-bar-height, 0px));
+}
+
+.uni-system-choose-location {
+  .nav {
+    padding-top: calc(var(--safe-area-inset-top) + var(--shell-status-bar-height));
+    box-sizing: content-box;
+
+    .nav-btn {
+      top: calc(var(--safe-area-inset-top) + var(--shell-status-bar-height));
+    }
+  }
+}
+
+.uni-system-open-location {
+  .nav-btn-back {
+    top: calc(var(--safe-area-inset-top) + var(--shell-status-bar-height));
+  }
+}
+
+// #endif

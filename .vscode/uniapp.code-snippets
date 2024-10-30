@@ -1,0 +1,249 @@
+{
+  "route": {
+    "prefix": "route",
+    "body": [
+      "<route lang=\"json\">{",
+      "\t${0}",
+      "}</route>",
+    ],
+    "scope": "vue",
+    "description": "route label"
+  },
+  "uniapp": {
+    "prefix": "uniapp:vue3",
+    "body": [
+      "<route lang=\"json\">{",
+      "  \"style\": {",
+      "    \"navigationBarTitleText\": \"$TM_FILENAME_BASE${1}\",",
+      "    \"app-plus\": {",
+      "      \"titleNView\": {",
+      "        \"type\": \"float\"",
+      "      }",
+      "    }",
+      "  }",
+      "}</route>",
+      "",
+      "<template>",
+      "\t<view>$TM_FILENAME_BASE</view>",
+      "</template>",
+      "",
+      "<script lang=\"ts\" setup></script>",
+      "",
+      "<style lang=\"scss\" scoped></style>"
+    ],
+    "scope": "vue",
+    "description": "uniapp of xml, ts and scss template"
+  },
+  "#ifdef": {
+    "prefix": "ifdef",
+    "body": [
+      "// #ifdef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
+      "$0",
+      "// #endif"
+    ],
+    "scope": "typescript,javascript,scss,jade"
+  },
+  "#ifndef": {
+    "prefix": "ifndef",
+    "body": [
+      "// #ifndef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
+      "$0",
+      "// #endif"
+    ],
+    "scope": "typescript,javascript,scss,jade"
+  },
+  "uImage": {
+    "body": [
+      "<image src=\"$1\" mode=\"$2\" />"
+    ],
+    "prefix": "image",
+    "scope": "html"
+  },
+  "uIcon": {
+    "body": [
+      "<icon type=\"$1\" />"
+    ],
+    "prefix": "icon",
+    "scope": "html"
+  },
+  "uPicker": {
+    "body": [
+      "<picker mode=\"$1\" :range=\"$2\" @change=\"$3\">",
+      "\t<view>picker组件</view>",
+      "</picker>"
+    ],
+    "prefix": "picker",
+    "scope": "html"
+  },
+  "uPickerView": {
+    "body": [
+      "<picker-view indicator-style=\"height: 50px;\" :value=\"value$1\" @change=\"bindChange\">",
+      "\t<picker-view-column>",
+      "\t\t$0",
+      "\t</picker-view-column>",
+      "\t<picker-view-column>",
+      "\t\t$2",
+      "\t</picker-view-column>",
+      "\t<picker-view-column>",
+      "\t\t",
+      "\t</picker-view-column>",
+      "</picker-view>"
+    ],
+    "prefix": "picker-view",
+    "scope": "html"
+  },
+  "uCheckbox": {
+    "body": [
+      "<checkbox value=\"$0\" />"
+    ],
+    "prefix": "checkbox",
+    "scope": "html"
+  },
+  "uCheckboxGroup": {
+    "body": [
+      "<checkbox-group name=\"checkbox\">",
+      "\t$0",
+      "</checkbox-group>"
+    ],
+    "prefix": "checkbox-group",
+    "scope": "html"
+  },
+  "uRadio": {
+    "body": [
+      "<radio value=\"$1\" />$0"
+    ],
+    "prefix": "radio",
+    "scope": "html"
+  },
+  "uRadioGroup": {
+    "body": [
+      "<radio-group name=\"radio\">",
+      "\t$0",
+      "</radio-group>"
+    ],
+    "prefix": "radio-group",
+    "scope": "html"
+  },
+  "uEditor": {
+    "body": [
+      "<editor placeholder=\"$1\" />"
+    ],
+    "prefix": "editor",
+    "scope": "html"
+  },
+  "uNavigator": {
+    "body": [
+      "<navigator url=\"$1\">$0</navigator>"
+    ],
+    "prefix": "navigator",
+    "scope": "html"
+  },
+  "uMap": {
+    "body": [
+      "<map :latitude=\"$1\" :longitude=\"$0\" />"
+    ],
+    "prefix": "map",
+    "scope": "html"
+  },
+  "uRichText": {
+    "body": [
+      "<rich-text :nodes=\"$1\" />"
+    ],
+    "prefix": "rich-text",
+    "scope": "html"
+  },
+  "uProgress": {
+    "body": [
+      " <progress percent=\"$1\" show-info$0 />"
+    ],
+    "prefix": "progress",
+    "scope": "html"
+  },
+  "uScrollView": {
+    "body": [
+      "<scroll-view scroll-y$1>",
+      "\t<view>$0</view>",
+      "\t<view></view>",
+      "\t<view></view>",
+      "\t<view></view>",
+      "</scroll-view>"
+    ],
+    "prefix": "scroll-view",
+    "scope": "html"
+  },
+  "uSlider": {
+    "body": [
+      "<slider @change=\"$1\" show-value$0/>"
+    ],
+    "prefix": "slider",
+    "scope": "html"
+  },
+  "uSwiper": {
+    "body": [
+      "<swiper :indicator-dots=\"true\" :autoplay=\"true\" :interval=\"3000\" :duration=\"1000\">",
+      "\t<swiper-item>",
+      "\t\t<view class=\"swiper-item\">$1</view>",
+      "\t</swiper-item>",
+      "\t<swiper-item>",
+      "\t\t<view class=\"swiper-item\">$2</view>",
+      "\t</swiper-item>",
+      "\t<swiper-item>",
+      "\t\t<view class=\"swiper-item\">$0</view>",
+      "\t</swiper-item>",
+      "</swiper>"
+    ],
+    "prefix": "swiper",
+    "scope": "html"
+  },
+  "uSwitch": {
+    "body": [
+      "<switch checked @change=\"$1\" />"
+    ],
+    "prefix": "switch",
+    "scope": "html"
+  },
+  "uTemplate": {
+    "body": [
+      "<template>",
+      "\t<view>$0</view>",
+      "</template>"
+    ],
+    "prefix": "template",
+    "scope": "html"
+  },
+  "uBlock": {
+    "body": [
+      "<block>$0</block>"
+    ],
+    "prefix": "block",
+    "scope": "html"
+  },
+  "uText": {
+    "body": [
+      "<text>$0</text>"
+    ],
+    "prefix": "text",
+    "scope": "html"
+  },
+  "uView": {
+    "body": [
+      "<view>$0</view>"
+    ],
+    "prefix": "view",
+    "scope": "html"
+  },
+  "uLabel": {
+    "body": [
+      "<label>$0</label>"
+    ],
+    "prefix": "label",
+    "scope": "html"
+  },
+  "uWebView": {
+    "body": [
+      "<web-view src=\"$1\"></web-view>"
+    ],
+    "prefix": "webview",
+    "scope": "html"
+  }
+}
